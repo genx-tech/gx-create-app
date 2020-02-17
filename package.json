@@ -1,0 +1,43 @@
+{
+  "name": "@genx/create-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Helper tool to init a genx application.",
+  "main": "lib/index.js",
+  "bin": {
+    "genx-init": "bin/create-app.js"
+  },
+  "scripts": {
+    "start": "babel-node ./src/cli/index",
+    "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",
+    "test:all": "npm run test:unit && npm run test:int",
+    "test:unit": "mocha src/**/__test__/*.spec.js",
+    "test:int": "mocha test/*.spec.js",
+    "test": "npm run test:all",
+    "cover": "npm run cover:unit && npm run cover:int && npm run cover:report",
+    "cover:unit": "nyc --silent npm run test:unit",
+    "cover:int": "nyc --silent --no-clean npm run test:int",
+    "cover:report": "nyc report --reporter=html --reporter=text",
+    "bulid:clean": "rm -rf lib",
+    "build": "npm run bulid:clean && NODE_ENV=development babel src -d lib --copy-files && del lib/**/__test__",
+    "build:prod": "npm run bulid:clean && NODE_ENV=production babel src -d lib --copy-files && del lib/**/__test__"
+  },
+  "keywords": [
+    "genx-suite",
+    "app",
+    "create",
+    "helper",
+    "init"
+  ],
+  "author": "rockie@kitmi.com.au",
+  "license": "MIT",
+  "peerDependencies": {
+    "@genx/app": "^1.0.0"
+  },
+  "devDependencies": {
+    "@genx/app": "1.0.0"
+  },
+  "dependencies": {
+    "shelljs": "^0.8.3"
+  }
+}
