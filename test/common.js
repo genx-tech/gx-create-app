@@ -1,27 +1,54 @@
-const APP_NAME = 'test';
+const path = require('path');
+const { _, fs, runCmdSync } = require('rk-utils');
+
+const TEST_DIR = path.resolve(__dirname);
+const TEMP_DIR = path.join(TEST_DIR, 'temp');
+
+const prepareDir = () => {
+    fs.ensureDirSync(TEST_DIR);
+    fs.emptyDirSync(TEMP_DIR);
+};
+
+exports.prepareDir = prepareDir;
 
 /**
  * @param {string} mode
  * @param {array} options
  */
-exports.init = (mode, options) => {
-    it('init', function () {   
+exports.init = (options, dirName = 'temp') => {
+    options = { name: 'test', ...options };
+
+    it('init', function () {  
         process.chdir(TEST_DIR);
 
-        let cmdLine = `node bin/create-app.js temp --mode=${mode} --name=${APP_NAME}`;
+        let cmdLine = `node ../src/cli/index.js ${dirName} `;
 
         if (options) {
-            cmdLine += options.join(' ');
+            cmdLine += _.map(options, (v, k) => (typeof v === 'boolean' ? (v ? `--${k}` : '') : ('--' + k + '=' + v))).join(' ');
         }
 
-        runCmdSync(cmdLine);
+        const log = runCmdSync(cmdLine);
+        console.log(log);
 
         let packageFile = path.join(TEMP_DIR, 'package.json');
         
         fs.existsSync(packageFile).should.be.ok();
 
         const pkg = require(packageFile);
-        pkg.name.should.be.equal(APP_NAME);
+        pkg.name.should.be.equal(options.name);
     });
 
+    if (!options['skip-install']) {
+        it('install', function () {   
+            process.chdir(TEMP_DIR);
+    
+            let cmdLine = `npm install`;
+    
+            let retCode = runCmdSync(cmdLine);
+    
+            console.log('return code', retCode);
+            
+            fs.existsSync(path.join(TEMP_DIR, 'node_modules')).should.be.ok();
+        });
+    }    
 }

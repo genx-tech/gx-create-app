@@ -6,7 +6,7 @@ Helper tool to init a genx application [https://github.com/genx-tech/gx-create-a
 
 ## Usage
 
-npm run init @genx/app
+npx init @genx/app
 
 * load latest boilerplate from github
 * init project with specified boilerplate

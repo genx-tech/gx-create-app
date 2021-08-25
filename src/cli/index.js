@@ -5,10 +5,12 @@ const AppInitiator = require('../AppInitiator');
 
 const appModes = [ 
     { name: "Command line application project", value: "cli" },    
-    { name: "Web server project to host multiple app", value: "server" },
-    { name: "App module (micro-service) project", value: "app" },
-    { name: "React app module project", value: "react" },    
-    { name: "Electron-based desktop project", value: "desktop" }    
+    { name: "Web server project to host multiple micro-service", value: "server" },
+    { name: "Micro-service as a web module to be hosted by server", value: "service" },
+    { name: "React component library", value: "lib" },    
+    { name: "React web app", value: "web" },    
+    { name: "React native mobile app", value: "mobile" },    
+    { name: "Electron-based desktop app", value: "desktop" }    
 ];
 
 function main () {
@@ -38,7 +40,7 @@ function main () {
         logger: {
             level: 'debug'
         },
-        commandName: 'create-app',
+        commandName: 'genx-init',
         config: {
             "version": pkg.version,
             "commandLine": {
@@ -73,7 +75,7 @@ function main () {
                     },
                     "m": {
                         "desc": "Target application mode",
-                        "alias": [ "mode", "app-mode" ],
+                        "alias": [ "mode" ],
                         "silentModeDefault": "web",
                         "inquire": true,
                         "required": true,

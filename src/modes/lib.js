@@ -1,10 +1,10 @@
 const path = require('path');
-const { _, fs, runCmdSync } = require('rk-utils');
+const { _, fs, runCmdLive_ } = require('rk-utils');
 const shell = require('shelljs');
 const { createFileByTemplate } = require('../utils');
 
-class DefaultInit {
-    constructor(owner, name, root, config) {
+class ReactLibInit {
+    constructor(owner, name, root, mergeMode, config) {
         this.owner = owner;
         this.appName = name.indexOf(' ') === -1 ? name : _.kebabCase(name),
         this.appRoot = root;
@@ -44,52 +44,16 @@ class DefaultInit {
     }
 
     async createFiles_() {
-        const fileName = 'package.json';
-        let packageFile = path.join(this.appRoot, fileName);
+        await runCmdLive_('npm', [ 'init', 'react-app', this.appName, '--use-npm'], 
+            out => console.log(out),
+            err => console.err(err)
+        );
 
-        let packageJson, merged = false; 
-
-        if (this.mergeMode && fs.existsSync(packageFile)) {
-            let existing = fs.readJsonSync(packageFile);
-
-            packageJson = {
-                ...existing,
-                dependencies: { ...existing.dependencies, ...(await this.getDependencies_()) },
-                devDependencies: { ...existing.devDependencies, ...(await this.getDevDependencies_()) },
-                scripts: { ...existing.scripts, ...(await this.getNpmScripts_()) } 
-            };
-
-            merged = true;
-        } else {
-            packageJson = {
-                name: this.appName,
-                version: '0.1.0',
-                description: _.startCase(this.appName),
-                private: true,
-                dependencies: (await this.getDependencies_()),
-                devDependencies: (await this.getDevDependencies_()),
-                scripts: (await this.getNpmScripts_())
-            };
-        }        
-
-        await this.fillPackageJson_(packageJson);        
-
-        fs.writeFileSync(
-            packageFile,
-            JSON.stringify(packageJson, null, 4));
-
-        if (merged) {
-            this.logUpdatedFile(fileName);
-        } else {
-            this.logCreatedFile(fileName);
-        }
-
-        if (!this.getCmdOption('package-lock')) {
-            this.copyFileFromTemplate('.npmrc', '.npmrc');      
-        }        
+        
     }
 
     async updateFiles_() {        
+
     }
 
     async fillPackageJson_(packageJson) {
@@ -152,4 +116,4 @@ class DefaultInit {
     }
 }
 
-module.exports = DefaultInit;
+module.exports = ReactLibInit;

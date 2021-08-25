@@ -1,15 +1,7 @@
 const path = require('path');
 const { _, eachAsync_, fs, runCmdSync } = require('rk-utils');
 
-const TEST_DIR = path.resolve(__dirname);
-const TEMP_DIR = path.join(TEST_DIR, 'temp');
-
-describe('BVT', function () {
-
-    before(function() {        
-        fs.ensureDirSync(TEMP_DIR);
-    });
-   
+describe('BVT', function () {   
     it('usage', function () {   
         const out = runCmdSync('node bin/create-app.js -?');
         const pkg = require('../package.json');

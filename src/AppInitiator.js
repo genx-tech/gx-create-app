@@ -20,15 +20,11 @@ class AppInitiator {
         let mergeMode = this.app.commandLine.option('merge');
 
         const SpecificAppInit = require(`./modes/${appMode}`);
-        let appInit = new SpecificAppInit(this, appName, targetPath, mergeMode, config || {});        
+        let appInit = new SpecificAppInit(this, appName, targetPath, config || {});        
         appInit.ensureIsSafeToCreateProjectIn();
 
         this.logger.log('verbose', 'Creating project files ...');
         await appInit.createFiles_();
-
-        if (mergeMode) {
-            await appInit.updateFiles_();
-        }
 
         if (!this.app.commandLine.option('skip-install')) {
             this.logger.log('verbose', 'Installing dependencies ...');
