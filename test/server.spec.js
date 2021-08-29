@@ -1,17 +1,7 @@
-const path = require('path');
-const { _, eachAsync_, fs, runCmdSync } = require('rk-utils');
+const testSuite = require('./testSuite');
 
-const common = require('./common');
-
-const TEST_DIR = path.resolve(__dirname);
-
-describe.only('Server', function () {
-
-    before(function() {        
-        fs.ensureDirSync(TEST_DIR);        
-    });
-
-    common.init({
+describe('Server', function () {
+    testSuite.init({
         'mode': 'server',
         'skip-install': true
     });    

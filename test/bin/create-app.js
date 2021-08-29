@@ -2,6 +2,6 @@
 
 'use strict';
 
-const main = require('../lib/cli');
+const main = require('../../src/cli');
 
 main();

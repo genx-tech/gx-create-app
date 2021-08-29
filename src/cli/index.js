@@ -1,44 +1,13 @@
 const { Starters: { startCommand } } = require('@genx/app');
 const pkg = require('../../package.json');
+const { appModeList } = require('../modes');
 
-const AppInitiator = require('../AppInitiator');
-
-const appModes = [ 
-    { name: "Command line application project", value: "cli" },    
-    { name: "Web server project to host multiple micro-service", value: "server" },
-    { name: "Micro-service as a web module to be hosted by server", value: "service" },
-    { name: "React component library", value: "lib" },    
-    { name: "React web app", value: "web" },    
-    { name: "React native mobile app", value: "mobile" },    
-    { name: "Electron-based desktop app", value: "desktop" }    
-];
+const runner = require('../runner');
 
 function main () {
-    startCommand((app) => {
-        let cmd = app.commandLine;
-
-        if (cmd.option('help')) {
-            cmd.showUsage();
-            return;
-        }
-
-        if (cmd.option('version')) {
-            console.log(pkg.version);
-            return;
-        }
-
-        let appDir = cmd.argv._[0];
-
-        const appInitiator = new AppInitiator({  
-            app,
-            cwd: process.cwd(),
-            logger: app.logger
-        });
-
-        return appInitiator.run(appDir, cmd.option('name'), cmd.option('mode'));
-    }, {
+    startCommand(runner, {
         logger: {
-            level: 'debug'
+            level: 'info'
         },
         commandName: 'genx-init',
         config: {
@@ -81,7 +50,7 @@ function main () {
                         "required": true,
                         "promptType": "list",
                         "promptMessage": "Please choose the target application mode:",
-                        "choicesProvider": appModes
+                        "choicesProvider": appModeList
                     },
                     "n": {
                         "desc": "Application name",
@@ -104,11 +73,6 @@ function main () {
                         "required": true,                    
                         "promptDefault": false,
                         "silentModeDefault": false
-                    },
-                    "merge": {
-                        "desc": "Merge with existing project",                        
-                        "bool": true,
-                        "default": false
                     },
                     "bp": {
                         "desc": "Project boilerplate",
