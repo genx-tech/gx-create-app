@@ -36,7 +36,13 @@ function main () {
                         "bool": true,
                         "default": false
                     },
-                    "?": {
+                    "l": {
+                        "desc": "Show a list of available app modes",
+                        "alias": [ "list-modes" ],
+                        "bool": true,
+                        "default": false
+                    },
+                    "h": {
                         "desc": "Show usage message",
                         "alias": [ "help" ],
                         "bool": true,
@@ -73,11 +79,7 @@ function main () {
                         "required": true,                    
                         "promptDefault": false,
                         "silentModeDefault": false
-                    },
-                    "bp": {
-                        "desc": "Project boilerplate",
-                        "alias": [ "boilerplate", "with-boilerplate" ]
-                    },                    
+                    },                              
                     "skip-install": {
                         "desc": "Skip dependencies installation",
                         "alias": [ "skip-npm-install" ],                    
@@ -88,10 +90,10 @@ function main () {
                         "silentModeDefault": false
                     }
                 },
-                "silentMode": cli => (cli.argv['silent'] || cli.argv['version'] || cli.argv['help']),
-                "nonValidationMode": cli => (cli.argv['version'] || cli.argv['help']),
+                "silentMode": cli => (cli.argv['s'] || cli.argv['v'] || cli.argv['h'] || cli.argv['l']),
+                "nonValidationMode": cli => (cli.argv['v'] || cli.argv['h'] || cli.argv['l']),
                 "showUsageOnError": true,
-                "showArguments": true
+                "showArguments": false
             }
         }
     });

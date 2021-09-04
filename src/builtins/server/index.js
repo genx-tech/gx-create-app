@@ -1,20 +1,25 @@
-const path = require('path');
-const localConfig = require('./config');
-const { steps } = require('../..');
+const path = require("path");
+const { fs } = require('@genx/sys'); 
+const localConfig = require("./config");
+const { steps } = require("../..");
+const getTemplatePath = require("../../utils/getTemplatePath");
 
-module.exports = async (app, ctx) => {
-    ctx = {
+module.exports = async (app, options) => {
+    options = {
         ...localConfig,
-        ...ctx
+        ...options,
     };
 
-    steps.ensureSafeToCreateProject(app, [
-        "package.json"
-    ], ctx);       
+    const targetPath = path.join(options.workingPath, options.appDir);
+    fs.ensureDirSync(targetPath);
 
-    const templatePath = path.resolve(__dirname, '../../../templates/server');
+    steps.ensureSafeToCreateProject_(app, targetPath, ["package.json"]);
 
-    await steps.copyFilesFromTemplate_(app, templatePath, ctx);   
+    const templatePath = getTemplatePath(options.appMode);
 
-    await steps.createOptionalFiles_(app, ctx);
+    await steps.copyFilesFromTemplate_(app, templatePath, targetPath, options);
+
+    await steps.createOptionalFiles_(app, targetPath, options);
+
+    await steps.npmInstall_(app, targetPath, options);
 };

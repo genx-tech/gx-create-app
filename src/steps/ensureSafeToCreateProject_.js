@@ -1,9 +1,7 @@
 const path = require('path');
 const { fs } = require('@genx/sys');
 
-const exitWithError = require('./exitWithError');
-
-module.exports = (app, arrayConflitFiles, { targetPath }) => {    
+module.exports = (app, targetPath, arrayConflitFiles) => {    
     const conflicts = [];
 
     arrayConflitFiles.forEach(file => {
@@ -15,6 +13,6 @@ module.exports = (app, arrayConflitFiles, { targetPath }) => {
     });
 
     if (conflicts.length > 0) {
-        exitWithError(`The target path [${targetPath}] contains files that could conflict:\n  - ` + conflicts.join('\n  - '));
+        throw new Error(`The target path [${targetPath}] contains files that could conflict:\n  - ` + conflicts.join('\n  - '));
     }
 }

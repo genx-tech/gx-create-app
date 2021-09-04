@@ -1,16 +1,14 @@
-const copyFileFromTemplate_ = require('./steps/copyFileFromTemplate_');
-const copyFilesFromTemplate_ = require('./steps/copyFilesFromTemplate_');
-const createOptionalFiles_ = require('./steps/createOptionalFiles_');
-const createPackageJson_ = require('./steps/createPackageJson_');
-const ensureSafeToCreateProject = require('./steps/ensureSafeToCreateProject');
-const exitWithError = require('./steps/exitWithError');
+const copyFilesFromTemplate_ = require("./steps/copyFilesFromTemplate_");
+const createOptionalFiles_ = require("./steps/createOptionalFiles_");
+const ensureSafeToCreateProject_ = require("./steps/ensureSafeToCreateProject_");
+const npmInstall_ = require("./steps/npmInstall_");
+const requireFilesExist_ = require("./steps/requireFilesExist_");
 
-exports.runner = require('./runner');
-exports.steps = {
-    copyFileFromTemplate_,
+exports.runner = require("./runner");
+exports.steps = {    
     copyFilesFromTemplate_,
     createOptionalFiles_,
-    createPackageJson_,
-    ensureSafeToCreateProject,
-    exitWithError
-}; 
+    ensureSafeToCreateProject_,
+    npmInstall_,
+    requireFilesExist_
+};

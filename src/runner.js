@@ -1,65 +1,102 @@
-const path = require('path');
-const { fs } = require('@genx/sys');
+const path = require("path");
+const { fs } = require("@genx/sys");
 
-const { appModes } = require('./modes');
-const exitWithError = require('./steps/exitWithError');
+const { appModes, appModeList } = require("./modes");
+const exitWithError = require("./utils/exitWithError");
+const tryDo_ = require("./utils/tryDo_");
+
+const pkg = require('../package.json');
+
+function overrideOptions(options, cmd, validatedArgs) {
+    Object.assign(options, validatedArgs);
+    
+    if (cmd.option("skip-install")) {
+        options.skipNpmInstall = true;
+    }
+
+    if (cmd.option("lock")) {
+        delete options.disablePackageLock;
+    }
+
+    options.workingPath = process.cwd();      
+}
+
+function getInitiator_(appMode) {
+    if (appMode.indexOf("://") > 0) {
+        //remote boilerplate
+
+        return undefined;
+    }
+
+    return require(`./builtins/${appMode}`);
+}
+
+function validateArguments(app, cmd) {
+    const appDir = cmd.argv._[0];
+    const appName = cmd.option("name");
+    const appMode = cmd.option("mode");
+    
+    if (appDir.indexOf("/") !== -1 || appDir.indexOf("\\") !== -1) {
+        exitWithError(app, "App directory should not contain path separator.");
+    }
+
+    if (appName.indexOf(" ") !== -1) {
+        exitWithError(app, "App name should not contain any space character.");
+    }
+
+    if (appName.split("/").length > 2) {
+        exitWithError(app, 'App name should not contain more than one "/" character.');
+    }
+
+    if (!appModes.includes(appMode)) {
+        exitWithError(app, `Unsupported app mode: ${appMode}`);
+    }
+
+    return {
+        appDir,
+        appName,
+        appMode,
+    };
+}
 
 module.exports = async (app) => {
     const cmd = app.commandLine;
 
-    if (cmd.option('help')) {
+    if (cmd.option("help")) {
         cmd.showUsage();
         return;
     }
 
-    if (cmd.option('version')) {
+    if (cmd.option("version")) {
         console.log(pkg.version);
         return;
-    }        
-
-    const appDir = cmd.argv._[0];
-    const appName = cmd.option('name');
-    const appMode = cmd.option('mode');
-
-    if (appName.indexOf(' ') !== -1) {
-        exitWithError('App name should not contain any space character.');
     }
 
-    if (appName.split('/').length > 2) {
-        exitWithError('App name should not contain more than one "/" character.');
+    if (cmd.option("list-modes")) {
+        cmd.showBannar();
+        
+        console.log(`All available app modes:\n\n  - ${appModeList.map(item => `${item.value}: ${item.name}`).join('\n  - ')}\n`);        
+        return;
     }
 
-    if (!appModes.includes(appMode)) {
-        exitWithError(`Unsupported app mode: ${appMode}`);
-    }
+    const validatedArgs = validateArguments(app, cmd);    
 
-    const targetPath = path.resolve(process.cwd(), appDir);    
-    try {
-        fs.ensureDirSync(targetPath);
-    } catch (error) {
-        exitWithError(error.message);
-    }   
-    
-    let config;
-    const configFile = cmd.option('config');
+    let options;
+
+    const configFile = cmd.option("config");
     if (configFile && fs.existsSync(configFile)) {
-        config = fs.readJsonSync(configFile);
-    } 
-    
-    let init_;
-
-    if (appMode.indexOf('://') > 0) {
-        //remote boilerplate
-
+        options = fs.readJsonSync(configFile);
     } else {
-        init_ = require(`./builtins/${appMode}`);
+        options = {};
     }
 
-    const context = {
-        ...config,    
-        appName,
-        targetPath
-    };
+    //override options with command line arguments
+    overrideOptions(options, cmd, validatedArgs);    
 
-    return init_(app, context);
-}
+    const init_ = await getInitiator_(validatedArgs.appMode);
+
+    //ensure project folder exists
+    return tryDo_(app, () => {
+        return init_(app, options);
+    });
+};

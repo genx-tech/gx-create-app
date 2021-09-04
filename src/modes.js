@@ -9,23 +9,23 @@ const REACT_NATIVE = 'mobile';
 const ELECTRON = 'desktop';
 
 const modeDescriptions = {
-    [CLI]: "Command line application project based on @genx/app",
-    [SERVER]: "Web server project based on @genx/server",    
+    //[CLI]: "Command line application project based on @genx/app",
+    [SERVER]: "Web service hosting project based on @genx/server",    
     [APP_MODULE]: "App module to be hosted by @genx/server",
-    [REACT_LIB]: "React component library",
-    [REACT_WEB]: "React web app",
-    [REACT_NATIVE]: "React native mobile app",
-    [ELECTRON]: "Electron-based desktop app"
+    //[REACT_LIB]: "React component library",
+    //[REACT_WEB]: "React web app",
+    //[REACT_NATIVE]: "React native mobile app",
+    //[ELECTRON]: "Electron-based desktop app"
 };
 
 exports.appModeList = objectToArray(modeDescriptions, "value", "name");
 
 exports.appModes = [
-    CLI,
+    //CLI,
     SERVER,
     APP_MODULE,
-    REACT_LIB,
-    REACT_WEB,
-    REACT_NATIVE,
-    ELECTRON
+    //REACT_LIB,
+    //REACT_WEB,
+    //REACT_NATIVE,
+    //ELECTRON
 ];
