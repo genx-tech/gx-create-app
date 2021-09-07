@@ -2,7 +2,7 @@ const { cmd } = require('@genx/sys');
 
 describe('BVT', function () {   
     it('usage', function () {   
-        const out = cmd.runSync('node bin/create-app.js -?');
+        const out = cmd.runSync('node bin/create-app.js -h');
         const pkg = require('../package.json');
 
         out.startsWith('Gen-X application initiator command line v' + pkg.version).should.be.ok();
