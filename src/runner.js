@@ -18,6 +18,10 @@ function overrideOptions(options, cmd, validatedArgs) {
         delete options.disablePackageLock;
     }
 
+    if (cmd.option("public")) {
+        options.publicMode = true;
+    }
+
     options.workingPath = process.cwd();      
 }
 

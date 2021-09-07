@@ -8,7 +8,7 @@ module.exports = async (app, targetPath, options, packages) => {
         app.log('info', 'Installing dependencies...');       
 
         try {
-            await cmd.runLive_('npm', ['install', ...packages], data => {
+            await cmd.runLive_('npm', ['install', ...(packages??[])], data => {
                 app.log('verbose', data.toString());
             }, data => {
                 app.log('error', data.toString());

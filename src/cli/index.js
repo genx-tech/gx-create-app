@@ -18,7 +18,7 @@ function main () {
                 "arguments": [
                     { 
                         "name": "app-directory", 
-                        "required": true, 
+                        "required": false, 
                         "inquire": true, 
                         "promptMessage": "Please enter the application directory (usually the app name):"
                     }
@@ -88,7 +88,14 @@ function main () {
                         "required": true,                    
                         "promptDefault": false,
                         "silentModeDefault": false
-                    }
+                    },
+                    "public": {
+                        "desc": "To publish publicly in npm",
+                        "bool": true,
+                        "inquire": true,                        
+                        "promptDefault": false,
+                        "silentModeDefault": false
+                    }      
                 },
                 "silentMode": cli => (cli.argv['s'] || cli.argv['v'] || cli.argv['h'] || cli.argv['l']),
                 "nonValidationMode": cli => (cli.argv['v'] || cli.argv['h'] || cli.argv['l']),

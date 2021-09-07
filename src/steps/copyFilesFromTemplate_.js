@@ -7,8 +7,6 @@ const copyFileFromTemplate_ = require("../utils/copyFileFromTemplate_");
 module.exports = async (app, templatePath, targetPath, options, skipOverriding) => {
     const files = await glob("**/*.*", { cwd: templatePath, dot: true });
     await eachAsync_(files, async (relativePath) => {
-        console.log(targetPath, relativePath);
-
         let sourceFile = path.join(templatePath, relativePath);
         let destFile = path.join(targetPath, relativePath);
 

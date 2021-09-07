@@ -29,7 +29,7 @@ async function updateServerConfig_(app, options) {
     };
 
     await fs.writeJson(serverConfigFile, serverConfig, { spaces: 4 });
-    app.log('info', `Updated "appRouting" in server default config: ${serverConfigFileName}`)
+    app.log('info', `Updated "appRouting" in server default config: ${serverConfigFileName}`);
 }
 
 module.exports = async (app, options) => {

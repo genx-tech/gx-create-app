@@ -8,7 +8,7 @@
         "@genx/server": "github:genx-tech/gx-server#v2",
         "@genx/jes": "^1.1.3",
         "@genx/july": "^0.2.10",        
-        "@genx/sys": "^0.1.2",
+        "@genx/sys": "^0.1.3",
         "luxon": "^2.0.2"
     },
     "devDependencies": {
