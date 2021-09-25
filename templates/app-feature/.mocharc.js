@@ -1,7 +1,5 @@
-require("@babel/register");
-
 module.exports = {
     timeout: 60000,
-    require: ["should"],
+    require: ["@babel/register", "should"],
     "enable-source-maps": true,
 };

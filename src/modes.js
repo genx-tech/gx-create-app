@@ -16,7 +16,7 @@ const modeDescriptions = {
     [APP_FEATURE]: "App feature to be used by @genx/app",
     //[REACT_LIB]: "React component library",
     //[REACT_WEB]: "React web app",
-    //[REACT_NATIVE]: "React native mobile app",
+    [REACT_NATIVE]: "React native mobile app",
     //[ELECTRON]: "Electron-based desktop app"
 };
 
@@ -26,9 +26,9 @@ exports.appModes = [
     //CLI,
     SERVER,
     APP_MODULE,
-    APP_FEATURE
+    APP_FEATURE,
     //REACT_LIB,
     //REACT_WEB,
-    //REACT_NATIVE,
+    REACT_NATIVE,
     //ELECTRON
 ];

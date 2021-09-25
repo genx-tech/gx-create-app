@@ -21,5 +21,7 @@ if (module.parent) {
     }
 
     const webServer = createWebServer(options);
-    webServer.start_();
+    webServer.start_().catch(error => {
+        console.error(error);
+    });
 }

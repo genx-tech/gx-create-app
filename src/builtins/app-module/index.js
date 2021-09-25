@@ -1,7 +1,7 @@
 const path = require("path");
 const { fs } = require('@genx/sys');
 const localConfig = require("./config");
-const { steps } = require("../..");
+const { steps, packageConfig } = require("../..");
 const getTemplatePath = require("../../utils/getTemplatePath");
 
 async function updateServerConfig_(app, options) {
@@ -54,7 +54,9 @@ module.exports = async (app, options) => {
 
     await steps.createOptionalFiles_(app, targetPath, options);
 
-    await updateServerConfig_(app, options);    
+    await updateServerConfig_(app, options);   
+    
+    await steps.updatePackageJson_(app, targetPath, (config) => packageConfig.addPackages(config, options));    
 
-    await steps.npmInstall_(app, options.workingPath, options, ['-D', 'lerna']);
+    await steps.npmInstall_(app, options.workingPath, options);
 };

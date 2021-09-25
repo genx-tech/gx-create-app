@@ -4,6 +4,8 @@ const { fs } = require("@genx/sys");
 const { appModes, appModeList } = require("./modes");
 const exitWithError = require("./utils/exitWithError");
 const tryDo_ = require("./utils/tryDo_");
+const download_ = require("./utils/download_");
+const getTempPath = require("./utils/getTempPath");
 
 const pkg = require('../package.json');
 
@@ -25,11 +27,14 @@ function overrideOptions(options, cmd, validatedArgs) {
     options.workingPath = process.cwd();      
 }
 
-function getInitiator_(appMode) {
+async function getInitiator_(app, appMode) {
     if (appMode.indexOf("://") > 0) {
         //remote boilerplate
+        //const targetFile = getTempPath('boilerplate.zip');
+        //await download_(app, appMode, targetFile);  
+        throw new Error('To be implemented');
 
-        return undefined;
+        //return undefined;
     }
 
     return require(`./builtins/${appMode}`);
@@ -97,7 +102,8 @@ module.exports = async (app) => {
     //override options with command line arguments
     overrideOptions(options, cmd, validatedArgs);    
 
-    const init_ = await getInitiator_(validatedArgs.appMode);
+    //load initiator by url or app mode
+    const init_ = await getInitiator_(app, validatedArgs.appMode);
 
     //ensure project folder exists
     return tryDo_(app, () => {

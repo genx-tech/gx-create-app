@@ -74,6 +74,11 @@ Create a private services hosting project outside the project directory.
 ```
 genx-init MyWebServer --name=my-web-server --mode=server 
 ```
+
+Create a mobile app.
+```
+genx-init MyAppDir --name=MyApp --mode=mobile 
+```
    
 ## License
 

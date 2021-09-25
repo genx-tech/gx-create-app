@@ -42,9 +42,9 @@
         "prettier": "prettier --write . --ignore-unknown",
         "lint": "eslint \"src/**/*.js\"",
         "commitlint": "commitlint --edit \"$1\"",
-        "bulid:clean": "del lib",
+        "bulid:clean": "del-cli lib",
         "build": "npm run bulid:clean && NODE_ENV=production babel src -d lib --ignore \"**/__test__/*.js\" --source-maps --copy-files --no-copy-ignored",        
-        "test:clean": "del allure-results",
+        "test:clean": "del-cli allure-results",
         "test": "npm run test:clean && NODE_ENV=test NODE_RT=babel mocha --reporter mocha-multi --reporter-options mocha-multi=test/mocha-multi-reporters.json test/*.spec.js",
         "cover": "npm run test:clean &&  NODE_ENV=test COVER_MODE=1 NODE_RT=babel nyc --reporter=html --reporter=text -- mocha --reporter mocha-multi --reporter-options mocha-multi=test/mocha-multi-reporters.json test/*.spec.js",
         "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
