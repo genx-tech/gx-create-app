@@ -64,20 +64,31 @@ Options:
 
 ## Samples
 
-Create a public app feature project inside the project directory.
+Create a public app feature project.
 ```
 mkdir example
-genx-init . --name=example-app --mode=app-feature --public
+genx-init MyAppFeature --name=example-app --mode=app-feature --public
 ```
 
-Create a private services hosting project outside the project directory.
+Create a private services hosting project.
 ```
 genx-init MyWebServer --name=my-web-server --mode=server 
+npm run dev
+//visit http://localhost:3000 to see the default page
+```
+
+Create an app module under the hosting project directory created by the above sample.
+```
+genx-init module-dir --name=my-module --mode=app-module 
+npm run dev
+//visit http://localhost:3000/hello to see the default page
 ```
 
 Create a mobile app.
 ```
 genx-init MyAppDir --name=MyApp --mode=mobile 
+npm run ios
+//or npm run android
 ```
    
 ## License
