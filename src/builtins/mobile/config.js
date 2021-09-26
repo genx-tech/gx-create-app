@@ -1,6 +1,7 @@
 module.exports = {
     disablePackageLock: true,
     dependencies: {
+        "@genx/react": "github:genx-tech/gx-react#v1",
         "@react-native-async-storage/async-storage": "^1.15.8",
         "@react-navigation/bottom-tabs": "^6.0.5",
         "@react-navigation/material-top-tabs": "^6.0.2",
@@ -16,6 +17,7 @@ module.exports = {
         "react-native-safe-area-context": "^3.3.2",
         "react-native-screens": "^3.7.2",
         "react-native-tab-view": "^3.1.1",
+        "react-native-vector-icons": "^8.1.0"
     },
     devDependencies: {        
         "@babel/plugin-proposal-export-namespace-from": "^7.14.5",

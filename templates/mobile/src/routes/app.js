@@ -1,56 +1,57 @@
-import React from "react";
-import SampleScreen from "screens/sample/SampleScreen";
-import MeStack from "packages/sample";
+import React from 'react';
+import SampleScreen from 'screens/sample/SampleScreen';
+import MeStack from 'packages/sample';
+import { Icon } from '@genx/react';
 
 export default {
-    initialRouteName: "Main",
+    initialRouteName: 'Main',
     screens: [
         {
-            name: "Main",
-            nested: "bottomTab",
+            name: 'Main',
+            nested: 'bottomTab',
             options: {
                 headerShown: false,
             },
             nestedOptions: {
-                initialRouteName: "Home",
-                tabBarOptions: {
-                    labelStyle: {
-                        fontWeight: "bold",
+                initialRouteName: 'Home',
+                screenOptions: {
+                    tabBarLabelStyle: {
+                        fontWeight: 'bold',
                     },
-                    style: {
+                    tabBarStyle: {
                         height: 88,
                         paddingTop: 4,
                     },
                 },
                 screens: [
                     {
-                        name: "Home",
+                        name: 'Home',
                         options: {
-                            title: "Home",
+                            title: 'Home',
+                            tabBarIcon: ({ focused, color, size }) => (
+                                <Icon
+                                    type="ionicon"
+                                    name="logo-react"
+                                    size={size}
+                                    color={color}
+                                />
+                            ),
                         },
-                        icon: ({ focused, color, size }) => (
-                            <Icon
-                                type="ionicon"
-                                name={focused ? "search" : "search-outline"}
-                                size={size}
-                                color={focused ? "green" : "blue"}
-                            />
-                        ),
                         component: SampleScreen,
                     },
                     {
-                        name: "Me",
+                        name: 'Me',
                         options: {
-                            title: "Me",
+                            title: 'Me',
+                            tabBarIcon: ({ focused, color, size }) => (
+                                <Icon
+                                    type="ionicon"
+                                    name={focused ? 'person' : 'person-outline'}
+                                    size={size}
+                                    color={color}
+                                />
+                            ),
                         },
-                        icon: ({ focused, color, size }) => (
-                            <Icon
-                                type="ionicon"
-                                name={focused ? "person" : "person-outline"}
-                                size={size}
-                                color={focused ? "green" : "blue"}
-                            />
-                        ),
                         component: MeStack,
                     },
                 ],
