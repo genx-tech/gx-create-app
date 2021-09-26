@@ -8,7 +8,8 @@
     "main": "lib/index.js",
     "dependencies": {
         "@genx/app": "github:genx-tech/gx-app#v2",
-        "@genx/error": "^1.1.1"
+        "@genx/error": "^1.1.1",
+        "source-map-support": "^0.5.20"
     },
     "devDependencies": {
         "@babel/cli": "^7.14.8",
@@ -34,8 +35,7 @@
         "mocha": "^9.1.1",
         "mocha-multi": "^1.1.3",
         "nodemon": "^2.0.12",
-        "prettier": "^2.3.2",
-        "source-map-support": "^0.5.19"
+        "prettier": "^2.3.2"
     },
     "scripts": {
         "prepare": "husky install",

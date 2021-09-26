@@ -39,13 +39,13 @@
         "del-cli": "^4.0.1",
         "mocha": "^9.1.1",
         "nyc": "^15.1.0",
-        "should": "^13.2.3",
-        "source-map-support": "^0.5.19"
+        "should": "^13.2.3"
     },
     "dependencies": {
         "@genx/app": "github:genx-tech/gx-app#v2",
         "@genx/july": "^0.2.10",
         "@genx/sys": "^0.1.5",
-        "shelljs": "^0.8.3"
+        "shelljs": "^0.8.3",
+        "source-map-support": "^0.5.20"
     }
 }

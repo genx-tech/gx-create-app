@@ -9,7 +9,8 @@
         "@genx/jes": "^1.1.3",
         "@genx/july": "^0.2.10",        
         "@genx/sys": "^0.1.3",
-        "luxon": "^2.0.2"
+        "luxon": "^2.0.2",
+        "source-map-support": "^0.5.20"
     },
     "devDependencies": {
         "@babel/cli": "^7.14.8",
@@ -24,8 +25,7 @@
         "del-cli": "^4.0.1",
         "mocha": "^9.1.1",
         "mocha-multi": "^1.1.3",
-        "nodemon": "^2.0.12",
-        "source-map-support": "^0.5.19"
+        "nodemon": "^2.0.12"
     },
     "scripts": {     
         "bulid:clean": "del server",
