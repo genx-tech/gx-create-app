@@ -45,6 +45,7 @@
         "@genx/app": "github:genx-tech/gx-app#v2",
         "@genx/july": "^0.2.10",
         "@genx/sys": "^0.1.5",
+        "inquirer": "^8.1.5",
         "minimist": "^1.2.5",
         "shelljs": "^0.8.3",
         "source-map-support": "^0.5.20",

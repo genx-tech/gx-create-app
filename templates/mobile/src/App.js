@@ -10,9 +10,9 @@ import appRoutes from 'routes/app';
 import initLocale from 'assets/locale';
 
 //import add-ons
-import '@genx/react/addons/navigations/stackNative';
-import '@genx/react/addons/navigations/bottomTabNative';
-import '@genx/react/addons/navigations/topTabMaterial';
+import '@genx/react-addon/navigations/stackNative';
+import '@genx/react-addon/navigations/bottomTabNative';
+import '@genx/react-addon/navigations/topTabMaterial';
 
 Runtime.setLogLevel('debug');
 
