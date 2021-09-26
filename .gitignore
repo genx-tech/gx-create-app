@@ -61,6 +61,5 @@ typings/
 .next
 
 # build output
-lib
 test/temp
 test/temp-app
