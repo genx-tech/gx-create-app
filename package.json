@@ -46,6 +46,7 @@
         "@genx/july": "^0.2.10",
         "@genx/sys": "^0.1.5",
         "shelljs": "^0.8.3",
-        "source-map-support": "^0.5.20"
+        "source-map-support": "^0.5.20",
+        "superagent": "^6.1.0"
     }
 }

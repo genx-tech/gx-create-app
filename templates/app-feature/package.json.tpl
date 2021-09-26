@@ -9,6 +9,8 @@
     "dependencies": {
         "@genx/app": "github:genx-tech/gx-app#v2",
         "@genx/error": "^1.1.1",
+        "@genx/july": "^0.3.2",        
+        "@genx/sys": "^0.1.5",
         "source-map-support": "^0.5.20"
     },
     "devDependencies": {
