@@ -1,13 +1,10 @@
 const path = require("path");
 const { fs } = require("@genx/sys");
 
-const templatePath = path.resolve(__dirname, '../../templates/optional');
-
 module.exports = async (app, targetPath, options) => {
-    if (options.disablePackageLock) {
-        const sourceFile = path.join(templatePath, '.npmrc');
-        const destFile = path.join(targetPath, '.npmrc');
-        await fs.copyFile(sourceFile, destFile);
+    if (options.disablePackageLock) {        
+        const destFile = path.join(targetPath, ".npmrc");
+        await fs.outputFile(destFile, 'package-lock=false\n', "utf8");
         app.log('info', `Added .npmrc to disable generation of package-lock.json`);       
     } 
 }

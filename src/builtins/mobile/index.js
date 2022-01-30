@@ -34,7 +34,7 @@ module.exports = async (app, options) => {
 
     const templatePath = getTemplatePath(options.appMode);
 
-    await steps.removeFiles_(app, targetPath, [".prettierrc.js", "App.js", "index.js"]);
+    await steps.removeFiles_(app, targetPath, ["app.json", ".prettierrc.js", "App.js", "index.js"]);
 
     await steps.copyFilesFromTemplate_(app, templatePath, targetPath, options);
 
@@ -44,7 +44,7 @@ module.exports = async (app, options) => {
         path.join(targetPath, fileMainActivity),
         options
     );
-    app.log('info', `Updated ${fileMainActivity}`);
+    app.log("info", `Updated ${fileMainActivity}`);
 
     await steps.createOptionalFiles_(app, targetPath, options);
 
@@ -56,27 +56,27 @@ module.exports = async (app, options) => {
 
     await steps.npmInstall_(app, targetPath, options);
 
-    await steps.runCommand_(app, targetPath, 'npm run pod');
-    await steps.runCommand_(app, targetPath, 'npm run link');
+    await steps.runCommand_(app, targetPath, "npm run pod");
+    await steps.runCommand_(app, targetPath, "npm run link");
 
     const iosProject = `ios/${options.appName}.xcodeproj/project.pbxproj`;
     await deleteLines_(path.join(targetPath, iosProject), [
-        '/* AntDesign.ttf in Resources */',
-        '/* Entypo.ttf in Resources */',
-        '/* EvilIcons.ttf in Resources */',
-        '/* Feather.ttf in Resources */',
-        '/* FontAwesome.ttf in Resources */',
-        '/* FontAwesome5_Brands.ttf in Resources */',
-        '/* FontAwesome5_Regular.ttf in Resources */',
-        '/* FontAwesome5_Solid.ttf in Resources */',
-        '/* Fontisto.ttf in Resources */',
-        '/* Foundation.ttf in Resources */',
-        '/* Ionicons.ttf in Resources */',
-        '/* MaterialCommunityIcons.ttf in Resources */',
-        '/* MaterialIcons.ttf in Resources */',
-        '/* Octicons.ttf in Resources */',
-        '/* SimpleLineIcons.ttf in Resources */',
-        '/* Zocial.ttf in Resources */',
+        "/* AntDesign.ttf in Resources */",
+        "/* Entypo.ttf in Resources */",
+        "/* EvilIcons.ttf in Resources */",
+        "/* Feather.ttf in Resources */",
+        "/* FontAwesome.ttf in Resources */",
+        "/* FontAwesome5_Brands.ttf in Resources */",
+        "/* FontAwesome5_Regular.ttf in Resources */",
+        "/* FontAwesome5_Solid.ttf in Resources */",
+        "/* Fontisto.ttf in Resources */",
+        "/* Foundation.ttf in Resources */",
+        "/* Ionicons.ttf in Resources */",
+        "/* MaterialCommunityIcons.ttf in Resources */",
+        "/* MaterialIcons.ttf in Resources */",
+        "/* Octicons.ttf in Resources */",
+        "/* SimpleLineIcons.ttf in Resources */",
+        "/* Zocial.ttf in Resources */",
     ]);
-    app.log('info', `Patched ${iosProject} for work around "react-native-vector-icons" duplicate resources issue.`);
+    app.log("info", `Patched ${iosProject} for work around "react-native-vector-icons" duplicate resources issue.`);
 };

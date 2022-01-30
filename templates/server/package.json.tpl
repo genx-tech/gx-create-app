@@ -28,8 +28,8 @@
         "nodemon": "^2.0.12"
     },
     "scripts": {        
-        "start": "NODE_RT=babel nodemon --exec babel-node src/index.js",
-        "dev": "NODE_RT=babel babel-node src/index.js",
+        "start": "NODE_RT=babel nodemon --exec babel-node --source-maps=true src/index.js",
+        "dev": "NODE_RT=babel babel-node --source-maps=true src/index.js",
         "bulid:clean": "del server",
         "build:server": "npm run bulid:clean && NODE_ENV=production babel src -d server --ignore \"**/__test__/*.js\" --source-maps --copy-files --no-copy-ignored",
         "build": "npm run build:server",
