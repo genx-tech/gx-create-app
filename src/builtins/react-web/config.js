@@ -1,25 +1,7 @@
 module.exports = {
-    disablePackageLock: false,
+    disablePackageLock: true,
     dependencies: {
-        "@genx/react": "*",
-        "@genx/react-addon": "github:genx-tech/gx-react-addon",
-        "@react-native-async-storage/async-storage": "^1.15.8",
-        "@react-navigation/bottom-tabs": "^6.0.5",
-        "@react-navigation/material-top-tabs": "^6.0.2",
-        "@react-navigation/native": "^6.0.2",
-        "@react-navigation/native-stack": "^6.1.0",
-        "@react-navigation/stack": "^6.0.7",
-        "galio-framework": "^0.8.0",    
-        "react-intl": "^5.20.12",    
-        "react-native-dotenv": "^3.2.0",
-        "react-native-elements": "^3.4.2",
-        "react-native-gesture-handler": "^1.10.3",        
-        "react-native-mime-types": "^2.3.0",
-        "react-native-pager-view": "^5.4.4",
-        "react-native-safe-area-context": "^3.3.2",
-        "react-native-screens": "^3.7.2",
-        "react-native-tab-view": "^3.1.1",
-        "react-native-vector-icons": "^8.1.0"
+
     },
     devDependencies: {        
         "@babel/plugin-proposal-export-namespace-from": "^7.14.5",

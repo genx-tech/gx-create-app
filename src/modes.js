@@ -5,7 +5,7 @@ const SERVER = 'server';
 const APP_MODULE = 'app-module';
 const APP_FEATURE = 'app-feature';
 const REACT_LIB = 'react-lib';
-const REACT_WEB = 'web';
+const REACT_WEB = 'react-web';
 const REACT_NATIVE = 'mobile';
 const ELECTRON = 'desktop';
 
@@ -15,7 +15,7 @@ const modeDescriptions = {
     [APP_MODULE]: "App module to be hosted by @genx/server",
     [APP_FEATURE]: "App feature to be used by @genx/app",
     //[REACT_LIB]: "React component library",
-    //[REACT_WEB]: "React web app",
+    [REACT_WEB]: "React web app",
     [REACT_NATIVE]: "React native mobile app",
     //[ELECTRON]: "Electron-based desktop app"
 };
@@ -28,7 +28,7 @@ exports.appModes = [
     APP_MODULE,
     APP_FEATURE,
     //REACT_LIB,
-    //REACT_WEB,
+    REACT_WEB,
     REACT_NATIVE,
     //ELECTRON
 ];
